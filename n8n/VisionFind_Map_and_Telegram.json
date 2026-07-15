@@ -1,0 +1,334 @@
+{
+  "name": "VisionFind Map and Telegram Tips",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "visionfind-investigation",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -464,
+        -16
+      ],
+      "id": "3c69848f-2ca4-4374-b4f8-b3528314c2a3",
+      "name": "VisionFind Website Webhook",
+      "webhookId": "2b0dd314-192c-43f1-a1c9-f9671cd8b10b"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "d8c012a8-a732-4c0d-ae28-c6ee72f74616",
+              "leftValue": "={{ $json.body.feature }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "cff5fd0d-b811-4968-8de5-5cb5f25a7063",
+              "leftValue": "={{ $json.body.case_id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -176,
+        -16
+      ],
+      "id": "014e6b69-c30a-42bb-ba6f-7c9b0d2e6230",
+      "name": "validate request fields"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "visionfind-witness-route",
+                    "leftValue": "={{ $('VisionFind Website Webhook').item.json.body.feature }}",
+                    "rightValue": "witness",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "visionfind-map-route",
+                    "leftValue": "={{ $('VisionFind Website Webhook').item.json.body.feature }}",
+                    "rightValue": "map",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "looseTypeValidation": true,
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        144,
+        -208
+      ],
+      "id": "d01d1984-84d1-474d-bcb9-e1edabe505a1",
+      "name": "Route Requested Feature"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ (() => {\n  const body = $('VisionFind Website Webhook').first().json.body || {};\n  const faults = [];\n  const feature = String(body.feature || '').trim().toLowerCase();\n\n  if (!feature) {\n    faults.push({ field: 'feature', problem: 'Feature is missing', expected: 'witness or map' });\n  } else if (!['witness', 'map'].includes(feature)) {\n    faults.push({ field: 'feature', problem: `Unsupported feature: ${body.feature}`, expected: 'witness or map' });\n  }\n\n  if (!String(body.case_id || '').trim()) {\n    faults.push({ field: 'case_id', problem: 'Case ID is missing', expected: 'A value such as VF001' });\n  }\n\n  return {\n    success: false,\n    error: 'Request validation failed',\n    fault_location: 'Request validation or feature routing',\n    faults\n  };\n})() }}",
+        "options": {
+          "responseCode": 400
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        32,
+        80
+      ],
+      "id": "3798fc31-172d-47ec-afdd-945e26c0ab94",
+      "name": "Return Validation Error"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1wMJqn5m7LiRz5-D43PyGrgaUCivsmuHrE14UdTUCErU",
+          "mode": "list",
+          "cachedResultName": "VisionFind_Case_Database",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wMJqn5m7LiRz5-D43PyGrgaUCivsmuHrE14UdTUCErU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1343364976,
+          "mode": "list",
+          "cachedResultName": "TIPS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wMJqn5m7LiRz5-D43PyGrgaUCivsmuHrE14UdTUCErU/edit#gid=1343364976"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Case ID",
+              "lookupValue": "={{ $('VisionFind Website Webhook').item.json.body.case_id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        864,
+        -192
+      ],
+      "id": "06f6b62e-d847-4d61-96bd-e6c7a6d426af",
+      "name": "Get Witness Tips",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ (() => {\n  const rows = $input.all().map(item => item.json).filter(row => Object.keys(row).length > 0);\n  const caseId = $('VisionFind Website Webhook').first().json.body.case_id;\n  return {\n    success: true,\n    feature: 'witness',\n    case_id: caseId,\n    tips: rows,\n    message: rows.length ? `${rows.length} witness tip(s) found.` : 'No witness tips found for this case.'\n  };\n})() }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1216,
+        -208
+      ],
+      "id": "716177de-6ef0-42c3-8c5f-2c2d09767266",
+      "name": "Return Witness Tips"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1wMJqn5m7LiRz5-D43PyGrgaUCivsmuHrE14UdTUCErU",
+          "mode": "list",
+          "cachedResultName": "VisionFind_Case_Database",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wMJqn5m7LiRz5-D43PyGrgaUCivsmuHrE14UdTUCErU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 623442398,
+          "mode": "list",
+          "cachedResultName": "Cases",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wMJqn5m7LiRz5-D43PyGrgaUCivsmuHrE14UdTUCErU/edit#gid=623442398"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Case ID",
+              "lookupValue": "={{ $('VisionFind Website Webhook').item.json.body.case_id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        864,
+        16
+      ],
+      "id": "49c9cb90-2aab-447e-8b54-6bae4761657c",
+      "name": "Get Official Case Locations",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ (() => {\n  const rows = $input.all().map(item => item.json).filter(row => Object.keys(row).length > 0);\n  const caseId = $('VisionFind Website Webhook').first().json.body.case_id;\n  return {\n    success: true,\n    feature: 'map',\n    case_id: caseId,\n    missing_person: rows[0]?.['Missing Person Name'] || null,\n    locations: rows.map(row => ({\n      coordinates: row['coordinates'],\n      date: row['Last Seen Date'],\n      time: row['Last seen timing'],\n      status: row['Status'],\n      full_record: row\n    })),\n    message: rows.length ? `${rows.length} official location(s) found.` : 'No official locations found for this case.'\n  };\n})() }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1072,
+        16
+      ],
+      "id": "e3570c87-7b32-4119-9af3-f933bea4d707",
+      "name": "Return Map Locations"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "VisionFind Website Webhook": {
+      "main": [
+        [
+          {
+            "node": "validate request fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "validate request fields": {
+      "main": [
+        [
+          {
+            "node": "Route Requested Feature",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Return Validation Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route Requested Feature": {
+      "main": [
+        [
+          {
+            "node": "Get Witness Tips",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get Official Case Locations",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Return Validation Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Witness Tips": {
+      "main": [
+        [
+          {
+            "node": "Return Witness Tips",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Official Case Locations": {
+      "main": [
+        [
+          {
+            "node": "Return Map Locations",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  }
+}

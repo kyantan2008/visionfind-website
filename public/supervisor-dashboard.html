@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- PAGE SETUP -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supervisor Dashboard | VisionFind Sketch</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="protected supervisor" data-required-role="Supervisor">
+  <!-- NAVIGATION BAR -->
+  <header class="topbar">
+    <!-- LOGO AREA -->
+    <a class="brand-lockup nav-brand" href="index.html">
+      <img class="nav-logo" src="assets/visionfind-emblem.png" alt="VisionFind emblem" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"><span class="vf-mark nav-fallback">VF</span>
+      <span>VisionFind Sketch</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="index.html">Home</a>
+      <a class="active" href="supervisor-dashboard.html">Supervisor Dashboard</a>
+      <a href="witness-tips.html">Witness Tips</a>
+      <a href="case-map.html">Map</a>
+      <span class="role-badge" data-user-role>Role</span>
+      <button class="logout-button" type="button" data-logout>Logout</button>
+    </nav>
+  </header>
+
+  <!-- SUPERVISOR DASHBOARD -->
+  <main class="history-page">
+    <section class="history-shell supervisor-shell">
+      <p class="system-label">Supervisor Workspace</p>
+      <h1>Supervisor Dashboard</h1>
+      <p class="hero-copy">Manage officer accounts and access control.</p>
+
+      <p class="disclaimer">
+        Full Supabase Auth user creation is handled by secure backend routes using a server-side service role key. Do not place secret keys in frontend JavaScript.
+      </p>
+
+      <!-- ADD OFFICER -->
+      <h2>Add Officer</h2>
+      <form id="addOfficerForm" class="login-form officer-form">
+        <label>Full name
+          <input id="officerFullName" name="full_name" type="text" required>
+        </label>
+        <label>Email
+          <input id="officerEmail" name="email" type="email" required>
+        </label>
+        <label>Password
+          <input id="officerPassword" name="password" type="password" autocomplete="new-password" required>
+        </label>
+        <button class="primary-action full-button" type="submit">Add Officer</button>
+        <p id="supervisorMessage" class="form-message" aria-live="polite"></p>
+      </form>
+
+      <!-- OFFICER LIST / UPDATE / REMOVE OFFICER -->
+      <h2>Officer List</h2>
+      <div class="table-wrap">
+        <table class="officer-table">
+          <thead>
+            <tr>
+              <th>Full name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Created date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="officerList">
+            <tr><td colspan="5">Loading officers...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="supabase-client.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+

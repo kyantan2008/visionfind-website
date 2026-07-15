@@ -1,0 +1,9 @@
+﻿<svg width="960" height="720" viewBox="0 0 960 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="720" fill="#02050D"/>
+  <rect x="80" y="72" width="800" height="576" rx="30" fill="#061326" stroke="#50E2FF" stroke-opacity="0.55" stroke-width="2"/>
+  <path d="M182 232C252 158 360 126 480 126C600 126 708 158 778 232" stroke="#50E2FF" stroke-opacity="0.28" stroke-width="2"/>
+  <circle cx="480" cy="312" r="116" fill="#08172E" stroke="#50E2FF" stroke-opacity="0.4" stroke-width="2"/>
+  <path d="M374 522C401 455 438 424 480 424C522 424 559 455 586 522" stroke="#50E2FF" stroke-opacity="0.4" stroke-width="2"/>
+  <text x="480" y="590" text-anchor="middle" fill="#EFF9FF" font-family="Arial" font-size="30" font-weight="700">VisionFind Sketch Placeholder</text>
+  <text x="480" y="626" text-anchor="middle" fill="#91ABC4" font-family="Arial" font-size="20">Illustrative visualisation for human review</text>
+</svg>

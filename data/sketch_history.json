@@ -1,0 +1,15 @@
+[
+  {
+    "sketchId": "SKETCH-BDF1FC2C",
+    "caseId": "demo try",
+    "witnessDescription": "awerstdyfughkjlj;",
+    "promptUsed": "Create an illustrative investigative sketch based only on the following witness description. The image should not depict a real known person. It should be a neutral, non-identifying visualisation for human review.\nAvoid police logos, official government insignia, realistic ID photo style, naming a real person, facial recognition wording, or claiming identity.\nUse a respectful, neutral composition. Do not imply guilt or confirmation.\nWitness description: awerstdyfughkjlj;\nAge range: 40\nGeneral gender presentation: Male\nBody build: Slim\nSkin tone / complexion: black\nHair style and colour: bald\nClothing: black pants,black clothes\nAccessories: bag\nLast seen location context: bedok mrt station\nSketch style: Semi-realistic\nOutput should feel like an AI-assisted sketch for an investigation case board, not an identity-confirming portrait.",
+    "imageUrl": "/assets/placeholder-sketch.svg",
+    "imageBase64": "",
+    "placeholder": "",
+    "generatedAt": "2026-07-09T02:13:50.536Z",
+    "completenessScore": 92,
+    "mode": "mock",
+    "disclaimer": "Generated images are illustrative sketches based on user-provided descriptions. They are not identity confirmations, facial recognition results, or verified evidence. Human review is required."
+  }
+]

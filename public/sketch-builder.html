@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- PAGE SETUP -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Sketch Interview Assistant | VisionFind Sketch</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="protected" data-required-role="Officer">
+  <!-- NAVIGATION BAR -->
+  <header class="topbar">
+    <!-- LOGO AREA -->
+    <!-- Other pages use the emblem or VF mark, not the full logo/name image. -->
+    <a class="brand-lockup nav-brand" href="index.html">
+      <img class="nav-logo" src="assets/visionfind-emblem.png" alt="VisionFind emblem" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"><span class="vf-mark nav-fallback">VF</span>
+      <span>VisionFind Sketch</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="index.html">Home</a>
+      <a class="active" href="sketch-builder.html">Sketch Builder</a>
+      <a href="history.html">History</a>
+      <a href="witness-tips.html">Witness Tips</a>
+      <a href="case-map.html">Map</a>
+      <span class="role-badge" data-user-role>Role</span>
+      <button class="logout-button" type="button" data-logout>Logout</button>
+    </nav>
+  </header>
+
+  <!-- MAIN BOTPRESS PAGE -->
+  <main class="bot-page">
+    <section class="bot-shell">
+      <!-- PAGE TITLE AND DESCRIPTION -->
+      <div class="bot-intro">
+        <p class="system-label">VisionFind Sketch</p>
+        <h1>AI Sketch Interview Assistant</h1>
+        <p>Answer the guided witness-description questions below. The assistant will prepare an AI-assisted sketch request for human review.</p>
+      </div>
+
+      <!-- BOTPRESS EMBED CONTAINER -->
+      <!-- This is where the Botpress bot will appear on the page -->
+      <!-- The ID must match the Botpress container ID setting -->
+      <div id="bp-embedded-webchat"></div>
+
+      <!-- SKETCH SAVE STATUS -->
+      <p id="sketchSaveStatus" class="form-message" aria-live="polite"></p>
+
+      <!-- DISCLAIMER -->
+      <p class="disclaimer">
+        Generated images are illustrative sketches based on user-provided descriptions. They are not identity confirmations, facial recognition results, or verified evidence. Human review is required.
+      </p>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="supabase-client.js"></script>
+  <script src="script.js"></script>
+
+  <!-- BOTPRESS SCRIPT AREA -->
+  <!-- =============================== -->
+  <!-- BOTPRESS EMBED CODE STARTS HERE -->
+  <!-- Make sure Botpress is set to Embedded mode -->
+  <!-- Container ID in Botpress must be: bp-embedded-webchat -->
+  <!-- =============================== -->
+
+  <script src="https://cdn.botpress.cloud/webchat/v3.6/inject.js"></script>
+  <script src="https://files.bpcontent.cloud/2026/07/07/09/20260707095332-LHCQS1HH.js" defer></script>
+
+  <!-- =============================== -->
+  <!-- BOTPRESS EMBED CODE ENDS HERE -->
+  <!-- =============================== -->
+</body>
+</html>
+
+
+
+
+

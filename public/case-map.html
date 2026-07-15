@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- PAGE SETUP -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case Sighting Map | VisionFind Sketch</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="protected case-map" data-required-role="Officer,Supervisor">
+  <!-- NAVIGATION BAR -->
+  <header class="topbar">
+    <!-- LOGO AREA -->
+    <a class="brand-lockup nav-brand" href="index.html">
+      <img class="nav-logo" src="assets/visionfind-emblem.png" alt="VisionFind emblem" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"><span class="vf-mark nav-fallback">VF</span>
+      <span>VisionFind Sketch</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="index.html">Home</a>
+      <a href="sketch-builder.html">Sketch Builder</a>
+      <a href="history.html">History</a>
+      <a href="witness-tips.html">Witness Tips</a>
+      <a class="active" href="case-map.html">Map</a>
+      <span class="role-badge" data-user-role>Role</span>
+      <button class="logout-button" type="button" data-logout>Logout</button>
+    </nav>
+  </header>
+
+  <!-- CASE SIGHTING MAP PAGE -->
+  <main class="history-page case-map-page">
+    <section class="history-shell case-map-shell">
+      <p class="system-label">Protected Case Intelligence</p>
+      <h1>Case Sighting Map</h1>
+      <p class="hero-copy">Search a case number to display its official recorded locations across Singapore.</p>
+
+      <!-- MAP CONTROLS -->
+      <form id="caseMapSearchForm" class="map-control-grid">
+        <label>Case number
+          <input id="caseMapSearchInput" type="text" placeholder="VF001" autocomplete="off" required>
+        </label>
+        <button class="primary-action" type="submit">Search</button>
+        <button id="toggleLabelsBtn" class="secondary-action" type="button">Toggle Labels</button>
+      </form>
+      <p id="caseMapStatus" class="form-message" aria-live="polite"></p>
+      <p id="labelMode" class="map-label-mode">Labels mode: Always visible</p>
+      <p class="search-zone-warning">
+        Estimated search zone only. The displayed area is calculated from the latest CCTV sighting time and selected movement mode. It does not show the suspect's confirmed location.
+      </p>
+      <div id="searchZoneMetrics" class="search-zone-metrics" aria-live="polite">
+        Search zone metrics will appear after a case is loaded.
+      </div>
+
+      <!-- LEAFLET MAP -->
+      <div id="caseMap" class="case-map-container" aria-label="Singapore case sighting map"></div>
+
+      <!-- SIGHTING TIMELINE -->
+      <section class="sighting-panel">
+        <div>
+          <p class="system-label">Timeline Evidence</p>
+          <h2>Chronological Sightings</h2>
+        </div>
+        <div id="sightingTimeline" class="sighting-timeline">
+          <article class="sighting-card">
+            <h3>No case searched yet</h3>
+            <p>Enter a case number to load protected sighting records.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- DISCLAIMER -->
+      <p class="disclaimer">
+        Location records require human review. Generated images and map routes are illustrative investigation aids, not identity confirmations or verified evidence.
+      </p>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="supabase-client.js"></script>
+  <script src="script.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="case-map.js"></script>
+</body>
+</html>
+
+

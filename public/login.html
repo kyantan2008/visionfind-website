@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- PAGE SETUP -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | VisionFind Sketch</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="login">
+  <!-- NAVIGATION BAR -->
+  <header class="topbar">
+    <!-- LOGO AREA -->
+    <a class="brand-lockup nav-brand" href="index.html">
+      <img class="nav-logo" src="assets/visionfind-emblem.png" alt="VisionFind emblem" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"><span class="vf-mark nav-fallback">VF</span>
+      <span>VisionFind Sketch</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="index.html">Home</a>
+      <a class="active" href="login.html">Login</a>
+    </nav>
+  </header>
+
+  <!-- LOGIN SYSTEM -->
+  <main class="login-page">
+    <section class="login-card">
+      <p class="system-label">Secure Access</p>
+      <h1>Login</h1>
+      <p class="login-copy">Sign in with a Supabase account to access the correct VisionFind Sketch workspace.</p>
+
+      <form id="loginForm" class="login-form">
+        <label>Email
+          <input id="email" name="email" type="email" autocomplete="username" required>
+        </label>
+        <label>Password
+          <input id="password" name="password" type="password" autocomplete="current-password" required>
+        </label>
+        <button class="primary-action full-button" type="submit">Enter Secure Workspace</button>
+        <p id="loginMessage" class="form-message" aria-live="polite"></p>
+      </form>
+
+      <!-- DEMO ACCOUNTS -->
+      <div class="account-list" aria-label="Demo login accounts">
+        <p><strong>Officer:</strong> officer@visionfind.ai / officer123</p>
+        <p><strong>Supervisor:</strong> supervisor@visionfind.ai / supervisor123</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="supabase-client.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Witness Tips | VisionFind Sketch</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="protected witness-tips" data-required-role="Officer,Supervisor">
+  <header class="topbar">
+    <a class="brand-lockup nav-brand" href="index.html">
+      <img class="nav-logo" src="assets/visionfind-emblem.png" alt="VisionFind emblem" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"><span class="vf-mark nav-fallback">VF</span>
+      <span>VisionFind Sketch</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="index.html">Home</a>
+      <a href="sketch-builder.html">Sketch Builder</a>
+      <a href="history.html">History</a>
+      <a class="active" href="witness-tips.html">Witness Tips</a>
+      <a href="case-map.html">Map</a>
+      <span class="role-badge" data-user-role>Role</span>
+      <button class="logout-button" type="button" data-logout>Logout</button>
+    </nav>
+  </header>
+
+  <main class="history-page witness-tips-page">
+    <section class="history-shell witness-tips-shell">
+      <p class="system-label">Protected Case Intelligence</p>
+      <h1>Witness Tips</h1>
+      <p class="hero-copy">Review unverified public reports linked to an existing case. Every tip requires human verification before action is taken.</p>
+
+      <form id="witnessTipsSearchForm" class="map-control-grid witness-search-form">
+        <label>Case ID
+          <input id="witnessTipsCaseId" type="text" placeholder="VF001" autocomplete="off" required>
+        </label>
+        <button class="primary-action" type="submit">Load Tips</button>
+      </form>
+
+      <p id="witnessTipsStatus" class="form-message" aria-live="polite"></p>
+      <div id="witnessTipsList" class="witness-tip-grid">
+        <article class="witness-tip-card">
+          <span class="tip-badge">Awaiting case</span>
+          <h2>No case searched yet</h2>
+          <p>Enter a Case ID to retrieve linked witness reports.</p>
+        </article>
+      </div>
+
+      <p class="disclaimer">Witness tips are unverified reports. They must not be treated as confirmed identity, location, evidence, or instructions for enforcement action.</p>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="supabase-client.js"></script>
+  <script src="script.js"></script>
+  <script src="witness-tips.js"></script>
+</body>
+</html>
